@@ -1,0 +1,100 @@
+﻿@model IEnumerable<OrderMgmtUsingEF.ViewModel.CustomerOrderProduct>
+@{
+
+
+    ViewBag.Title = "All Confirmed Orders";
+
+    List<int> orderIDList = new List<int>(ViewBag.orderIDList);
+    List<string> productnameList = new List<string>(ViewBag.stringCollectionProductName);
+    int numberOfProducts = productnameList.Count();
+}
+<h2 class="text-center">Confirmed Customer Orders</h2>
+
+<input type="text" id="myProductInput" onkeyup="myProductFunction()" placeholder="Enter Product Name.." title="Type in a name">
+<br />
+<br />
+<input type="text" id="myOrderInput" onkeyup="myOrderFunction()" placeholder="Enter Order ID Number.." title="Type in a name">
+<br />
+<br />
+<table id="myTable" class="table table-bordered table-responsive table-hover table-striped">
+
+    <tr class="header">
+        <th>
+            @Html.DisplayNameFor(model => model.OrderID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            Tasks
+        </th>
+    </tr>
+
+
+    @for (int p = 0; p <= numberOfProducts - 1; p++)
+    {
+        <tr>
+            <td>
+                @Html.Raw(orderIDList[p])
+            </td>
+
+            <td>
+                @Html.Raw(productnameList[p])
+            </td>
+            <td>
+                <div>
+                    <button type="button" onclick="location.href='@Url.Action("Edit", "Orders", new { id = Convert.ToInt32(orderIDList[p]) })'" class="btn btn-default btn-sm">Edit</button>
+                    <button type="button" onclick="location.href='@Url.Action("CreateInvoice", "Orders", new { id = (int)Session["CustomerID"] })'" class="btn btn-default btn-sm">Invoice</button>
+                    <button type="button" onclick="location.href='@Url.Action("CustomerCancelOrder", "Orders", new { id = Convert.ToInt32(orderIDList[p]) })'" class="btn btn-warning btn-sm ">Cancel Order</button>
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>
+<hr />
+<br />
+<div>
+    <button type="button" onclick="location.href='@Url.Action("Create", "Orders", new { id = (int)Session["CustomerID"] })'" class="btn btn-success">Add new order</button>
+</div>
+<br />
+<div>
+    <button type="button" onclick="location.href='@Url.Action("CancelledOrders", "Orders", new { id = (int)Session["CustomerID"] })'" class="btn btn-primary ">Cancelled orders list</button>
+</div>
+
+<script>
+    function myProductFunction() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("myProductInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+    function myOrderFunction() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("myOrderInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>

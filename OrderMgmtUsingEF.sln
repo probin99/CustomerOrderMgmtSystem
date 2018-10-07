@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderMgmtUsingEF", "OrderMgmtUsingEF\OrderMgmtUsingEF.csproj", "{C92DF6FD-08D6-4455-97EB-A026D0D62FD5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C92DF6FD-08D6-4455-97EB-A026D0D62FD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C92DF6FD-08D6-4455-97EB-A026D0D62FD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C92DF6FD-08D6-4455-97EB-A026D0D62FD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C92DF6FD-08D6-4455-97EB-A026D0D62FD5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {54FA5B81-CB74-4AC1-A5B3-ADADE2EB1912}
+	EndGlobalSection
+EndGlobal

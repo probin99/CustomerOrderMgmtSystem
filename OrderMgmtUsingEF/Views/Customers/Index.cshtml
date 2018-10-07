@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+<br />
+<h2 class="text-center">Welcome</h2>
+
+@using (Html.BeginForm("Create", "Customers", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <br />
+    <br />
+    <div>
+        <h3>Are You New?</h3>
+        <input type="submit" value="Register Yourself" class="btn-success form-control" />
+    </div>
+}

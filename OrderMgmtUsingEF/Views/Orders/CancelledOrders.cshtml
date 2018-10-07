@@ -1,0 +1,40 @@
+﻿@model IEnumerable<OrderMgmtUsingEF.ViewModel.CustomerOrderProduct>
+
+@{
+    ViewBag.Title = "Cancelled Orders";
+    List<int> orderIDList = new List<int>(ViewBag.orderIDList);
+    List<string> productnameList = new List<string>(ViewBag.stringCollectionProductName);
+    int numberOfProducts = productnameList.Count();
+}
+
+<h2 class="text-center">Cancelled Orders</h2>
+<table class="table table-bordered table-responsive table-hover table-striped">
+
+    <tr class="header">
+        <th>
+            @Html.DisplayNameFor(model => model.OrderID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+    </tr>
+
+
+    @for (int p = 0; p <= numberOfProducts - 1; p++)
+    {
+        <tr>
+            <td>
+                @Html.Raw(orderIDList[p])
+            </td>
+
+            <td>
+                @Html.Raw(productnameList[p])
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div>
+    <button type="button" onclick="location.href='@Url.Action("ConfirmedOrders", "Orders", new { id = (int)Session["CustomerID"] })'" class="btn btn-default">Back to List</button>
+</div>

@@ -1,0 +1,55 @@
+﻿@model OrderMgmtUsingEF.Models.ProductList
+
+@{
+    ViewBag.Title = "Make Order";
+}
+
+<h2 class="text-center">Place Your Order</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <p><b>Customer ID:</b></p>
+        @Html.HiddenFor(model => model.Customer.CustomerID)
+        @Html.DisplayTextFor(model => model.Customer.CustomerID)
+
+        <p><b>Customer Name:</b></p>
+        @Html.HiddenFor(model => model.Customer.CustomerName)
+        @Html.DisplayTextFor(model => model.Customer.CustomerName)
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.Products)
+        <ol>
+            @for (int i = 0; i < Model.Products.Count; i++)
+            {
+                <li>
+                    @Html.CheckBoxFor(m => Model.Products[i].IsCheck)
+                    @Model.Products[i].ProductName
+                    @Html.HiddenFor(m => Model.Products[i].ProductID)
+                    @Html.HiddenFor(m => Model.Products[i].ProductName)
+                    @Html.HiddenFor(m => Model.Products[i].UnitPrice)
+                </li>
+            }
+        </ol>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Place Order" class="btn btn-default" />
+        </div>
+    </div>
+
+</div>
+}
+
+<div>
+    <button type="button" onclick="location.href='@Url.Action("ConfirmedOrders", "Orders", new { id = Model.Customer.CustomerID})'" class="btn btn-primary ">See Your Orders</button>
+</div>

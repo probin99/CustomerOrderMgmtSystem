@@ -1,0 +1,99 @@
+﻿@model IEnumerable<OrderMgmtUsingEF.ViewModel.CustomerOrderProduct>
+
+@{
+    ViewBag.Title = "Cancel Order Page";
+}
+
+<div>
+    
+    <h3 class="text-center">Do You Want To Cancel This Order</h3>
+    <table class="table table-responsive " style=" border:hidden;">
+        <tr class="text-center">
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderStatus)
+            </th>
+
+        </tr>
+        @{
+            int i = 1;
+        }
+        @foreach (var item in Model)
+        {
+            if (i == 1)
+            {
+
+                i++;
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderStatus)
+                    </td>
+
+                    <td>
+                </tr>
+            }
+        }
+    
+        <tr class=" text-center">
+            <th>
+                @Html.DisplayNameFor(model => model.ProductID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitPrice)
+            </th>
+
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+            </tr>
+        }
+    </table>
+
+    <div class="text-center">
+        <h3>@Html.DisplayNameFor(model => model.TotalPrice)</h3>
+        @{
+            double totalPrice = 0;
+            int customerID =0;
+        }
+        @foreach (var item in Model)
+        {
+
+            totalPrice += item.UnitPrice;
+            customerID = item.CustomerID;
+        }
+        <h3>@totalPrice</h3>
+    </div>
+</div>
+
+
+<div>
+    <button type="button" onclick="location.href='@Url.Action("ConfirmCustomerCancel", "Orders", new { id = (int)Session["OrderID"] })'" class="btn btn-danger">Cancel Order</button>
+    <br />
+    <br />
+    <button type="button" onclick="location.href='@Url.Action("ConfirmedOrders", "Orders", new { id = customerID })'" class="btn btn-default">Back to List</button>
+</div>

@@ -1,0 +1,96 @@
+﻿@model IEnumerable<OrderMgmtUsingEF.ViewModel.CustomerOrderProduct>
+
+@{
+    ViewBag.Title = "Customer Invoice";
+}
+
+<br />
+<div class="table-bordered bg-success">
+    <h2 class="text-center">Bill</h2>
+    <h4 class="text-center"><b>Invoice Number: @ViewBag.invoiceNumber</b></h4>
+    <br />
+
+    <table class="table table-responsive " style=" border:hidden;">
+        <tr class="text-center">
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderStatus)
+            </th>
+
+        </tr>
+        @{
+            int i = 1;
+        }
+        @foreach (var item in Model)
+        {
+            if (i == 1)
+            {
+
+                i++;
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerID)                        
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderStatus)
+                    </td>
+                    
+                    <td>
+                </tr>
+            }
+        }
+    </table>
+    <br />
+    <h4>Products Ordered</h4>
+    <table class="table table-responsive">
+        <tr class=" text-center">
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitPrice)
+            </th>
+
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+            </tr>
+        }
+    </table>
+
+    <div class="text-center">
+        <h3>@Html.DisplayNameFor(model => model.TotalPrice)</h3>
+        @{
+            double totalPrice = 0;
+            int customerID = 0;
+        }
+        @foreach (var item in Model)
+        {
+            customerID = item.CustomerID;
+            totalPrice += item.UnitPrice;
+        }
+
+        <h3>@totalPrice</h3>
+    </div>
+</div>
+<br />
+
+<div>
+    <button type="button" onclick="location.href='@Url.Action("ConfirmedOrders", "Orders", new { id = @customerID })'" class="btn btn-danger">Back to List</button>
+</div>
